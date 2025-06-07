@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM - System for Academic Mastery | Learn to Study Effectively</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .owl-icon {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .problem-content {
+            text-align: center;
+        }
+
+        .problem-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .bad-advice {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .advice-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #ff6b6b;
+            transition: transform 0.3s ease;
+        }
+
+        .advice-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .advice-item::before {
+            content: "❌";
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .frustration-text {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .solution-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .solution-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .solution-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Creator Section */
+        .creator-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .creator-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .creator-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .creator-text {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .creator-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .creator-text p {
+            font-style: italic;
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 400px;
+            margin: 2rem auto;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .price-subtext {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .creator-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .creator-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="owl-icon">🦉</div>
+                <span>SAM - System for Academic Mastery</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About SAM</a></li>
+                <li><a href="#creator">Creator</a></li>
+                <li><a href="#pricing">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Is There a Better Way to Study?</h1>
+                <p>Stop wasting time with ineffective study methods. Learn the science-backed system that actually works.</p>
+                <a href="#pricing" class="cta-button">Master Learning in Under an Hour</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <div class="problem-content">
+                <h2>You've Been Given Terrible Study Advice</h2>
+                <div class="bad-advice">
+                    <div class="advice-item">
+                        <strong>"Organize your notes"</strong>
+                    </div>
+                    <div class="advice-item">
+                        <strong>"Highlight everything important"</strong>
+                    </div>
+                    <div class="advice-item">
+                        <strong>"Make a mind-map"</strong>
+                    </div>
+                    <div class="advice-item">
+                        <strong>"Do flashcards"</strong>
+                    </div>
+                    <div class="advice-item">
+                        <strong>"Recopy everything"</strong>
+                    </div>
+                </div>
+                <p class="frustration-text">
+                    Even trendy techniques like active recall and spaced repetition are grounded in research, but they aren't a complete system. Most students are left wondering what to actually do. And it doesn't help that grifters capitalize on this confusion by further complicating it: selling you a $500 online course that takes 10 weeks to complete.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <div class="container">
+            <div class="solution-content">
+                <h2>The Science is Clear</h2>
+                <p>There IS a right way to learn and study in less time. After years of research and refinement, I've distilled the most effective learning strategies into a simple, actionable system.</p>
+                <p>And you'll master it in <span class="highlight">under an hour</span>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="features-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">What Makes SAM Different?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Science-Based System</h3>
+                    <p>No fluff or outdated advice. Every technique is backed by cognitive science research and proven to work.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Learn in Under an Hour</h3>
+                    <p>Skip the 10-week courses. Get the complete system quickly and start applying it immediately.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Complete Framework</h3>
+                    <p>Not just scattered tips. A comprehensive system that tells you exactly what to do, when, and how.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Immediate Results</h3>
+                    <p>Start seeing improvements in your learning effectiveness from day one of implementation.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Universal Application</h3>
+                    <p>Works for any subject, any level, any learning goal. From high school to graduate studies.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💡</div>
+                    <h3>Practical & Actionable</h3>
+                    <p>No theory without practice. Get step-by-step instructions you can implement immediately.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="creator" class="creator-section">
+        <div class="container">
+            <div class="creator-content">
+                <div class="creator-image">
+                    👨‍🎓
+                </div>
+                <div class="creator-text">
+                    <h2>Meet Sam - Creator of SAM</h2>
+                    <p>"After years of research and refinement, I am proud to present SAM - System for Academic Mastery. I hope you enjoy the free time it gives you."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Master Learning Today</h2>
+            <div class="pricing-card">
+                <h3>SAM Course</h3>
+                <div class="price">$97</div>
+                <p class="price-subtext">One-time payment • Lifetime access</p>
+                <ul style="text-align: left; margin: 2rem 0; list-style: none;">
+                    <li>✅ Complete SAM learning system</li>
+                    <li>✅ Science-backed techniques</li>
+                    <li>✅ Step-by-step implementation guide</li>
+                    <li>✅ Learn in under 1 hour</li>
+                    <li>✅ Works for any subject</li>
+                    <li>✅ Lifetime access</li>
+                    <li>✅ 30-day money-back guarantee</li>
+                </ul>
+                <a href="#" class="cta-button" onclick="alert('Thank you for your interest! This is a demo website. Contact Sam to learn more about the actual course.')">Get Instant Access</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SAM - System for Academic Mastery. Transform your learning today.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+    </script>
+</body>
+</html>
